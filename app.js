@@ -1,10 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const expressHbs = require('express-handlebars');
 
 const app = express();
 
 const users = [];
 
+app.engine('hbs', expressHbs(defaultLayout: 'main', extname: 'hbs'));
 app.set('view engine', 'pug');
 app.set('views', 'views');
 
