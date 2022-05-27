@@ -6,8 +6,11 @@ const app = express();
 
 const users = [];
 
-app.engine('hbs', expressHbs(defaultLayout: 'main', extname: 'hbs'));
-app.set('view engine', 'pug');
+// app.engine('hbs', expressHbs.engine({defaultLayout: 'main', extname: 'hbs'}));
+app.engine('hbs', expressHbs.engine({ layoutsDir: __dirname + '/views/layout', extname: 'hbs'}));
+
+// app.set('view engine', 'pug');
+app.set('view engine', 'hbs');
 app.set('views', 'views');
 
 app.use(bodyParser.urlencoded({extended: false}))
@@ -17,7 +20,7 @@ app.get('/', (req, res, next) => {
 })
 
 app.get('/users', (req, res, next) => {
-  res.render('users', {pageTitle: 'Users', users: users});
+  res.render('users', {pageTitle: 'Users', users: users, hasUsers: users.lentgh > 0});
 })
 
 app.post('/add-user', (req, res, next) => {
@@ -25,4 +28,4 @@ app.post('/add-user', (req, res, next) => {
   res.redirect('/users');
 })
 
-app.listen(3002);
+app.listen(3003);
